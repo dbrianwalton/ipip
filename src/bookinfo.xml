@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  This is the information needed universally for the book.
+
+  Define:
+    - initialism for Sage sorting
+    - brandlogo image for header
+    - latex macros
+    - preample for latex images
+    - feedback url
+-->
+<docinfo>
+  <!-- Brand logo that appears in upper left corner of html version -->
+  <brandlogo url="http://educ.jmu.edu/~waltondb/WLADQ/linalg-diffeq.pdf" source="images/book-cover-acorns-thumb.jpg" />
+  <coverimage>images/book-cover-acorns.jpg</coverimage>
+
+  <!-- Prefix used for Sage Notebook generation -->
+  <initialism>IPIP</initialism>
+
+  <document-id>pretext-IPIP</document-id>
+  <!-- Feedback element -->
+  <feedback>
+    <url>https://goo.gl/forms/uN6O5w0feUGpjTwO2</url>
+  </feedback>
+
+  <!-- preamble inserted for LaTeX and standalone images -->
+  <latex-image-preamble>
+    \usepackage{cancel}
+    \usepackage{pgfplots}
+    \pgfplotsset{compat=1.8}
+    \usepgfplotslibrary{fillbetween}
+    %\usepackage{tikz}
+    %\usetikzlibrary{backgrounds}
+        %\usetikzlibrary{datavisualization} % LATEX and plain TEX
+    \usetikzlibrary{arrows,matrix,calc}
+  </latex-image-preamble>
+
+  <!-- LaTeX macros -->
+  <macros>
+  \newcommand{\N}{\mathbb{N}}
+  \newcommand{\Z}{\mathbb{Z}}
+  \newcommand{\R}{\mathbb{R}}
+  </macros>
+</docinfo>

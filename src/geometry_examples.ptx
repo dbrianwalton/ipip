@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file is part of the book                -->
+<!--                                              -->
+<!--      A Modeling Approach to Calculus         -->
+<!--                                              -->
+<!-- Copyright (C) 2019  D. Brian Walton          -->
+<!-- See the file COPYING for copying conditions. -->
+
+<section xml:id="section-geometry-examples">
+    <title>Illustrations of Geometry</title>
+
+    <p>
+      JSXGraph is a pure JavaScript solution to an interactive geometry tool.
+      The standard way to generate JSXGraph interactive plots is to use a JavaScript API.
+      However, it also supports a light-weight scripting code called Jessie Code.
+      Each element defined in the API can be constructed using a corresponding call in Jessie Code.
+      The resulting graphic is a pure SVG figure that often can be manipulated with interactive elements.
+    </p>
+    <p>
+      We generate a figure by adding one element at a time.
+      If a later element is dependent on an earlier element,
+      then we need to assign that element an <em>id</em>.
+      Independent of the <em>id</em> is a <em>name</em> which appears when labels are active.
+      Jessie Code also allows us to define variables that we can use.
+    </p>
+
+    <example>
+      <p>
+        We start with a simple geometric construction,
+        corresponding to Proposition 2 of Book I of Euclid's Elements.
+        Given two points <m>A</m> and <m>B</m> that define a line segment of a given length and a third point, <m>C</m>,
+        we will construct a line segment from <m>C</m> that is equal in length to <m>AB</m>.
+      </p>
+      <p>
+        The figure below illustrates such a construction.
+        The points <m>A</m>, <m>B</m>, and <m>C</m> are all dynamic,
+        meaning if you move their location, the construction is immediately updated.
+      </p>
+      <figure>
+        <caption>Construction for Euclid's Proposition 2.</caption>
+        <interactive xml:id='euclid-prop-2-construction' platform='jsxgraph' width="75%" aspect="1:1">
+          <slate xml:id='euclid-prop-2-slate' surface="jessiecode">
+            A = point(1,1);
+            A.size = 5;
+            A.color = "blue";
+            B = point(2,4);
+            B.size = 5;
+            B.color = "blue";
+            S1 = segment(A,B);
+            S1.strokeWidth = 3;
+            S1.strokeColor = "blue";
+            C = point(-1,1);
+            C.size = 5;
+            C.color = "orange";
+            C1 = circle(A,C);
+            C1.dash = 2;
+            C2 = circle(C,A);
+            C2.dash = 2;
+            M1 = midpoint(A,C);
+            M1.name = "";
+            M1.visible = false;
+            D = intersection(C1,C2);
+            C3 = circle(A,B);
+            C3.dash = 2;
+            L2 = line(D,A);
+            L2.straightFirst = false;
+            G = intersection(L2,C3);
+            C4 = circle(D,G);
+            L3 = line(D,C);
+            L3.straightFirst = false;
+            H = intersection(L3,C4);
+            H.color = "orange";
+            S2 = segment(C,H);
+            S2.strokeWidth = 3;
+            S2.strokeColor = "orange";
+          </slate>
+        </interactive>
+      </figure>
+      <p>
+        The construction used to generate this involved the following Jessie Code commands.
+      </p>
+      <listing>
+        <pre>
+          A = point(1,1);
+          A.size = 5;
+          A.color = "blue";
+          B = point(2,4);
+          B.size = 5;
+          B.color = "blue";
+          S1 = segment(A,B);
+          S1.strokeWidth = 3;
+          S1.strokeColor = "blue";
+          C = point(-1,1);
+          C.size = 5;
+          C.color = "orange";
+          C1 = circle(A,C);
+          C1.dash = 2;
+          C2 = circle(C,A);
+          C2.dash = 2;
+          M1 = midpoint(A,C);
+          M1.visible = false;
+          D = intersection(C1,C2);
+          C3 = circle(A,B);
+          C3.dash = 2;
+          L2 = line(D,A);
+          L2.straightFirst = false;
+          G = intersection(L2,C3);
+          C4 = circle(D,G);
+          L3 = line(D,C);
+          L3.straightFirst = false;
+          H = intersection(L3,C4);
+          H.color = "orange";
+          S2 = segment(C,H);
+          S2.strokeWidth = 3;
+          S2.strokeColor = "orange";
+        </pre>
+      </listing>
+      <p>
+        Notice that some of the commands were used to construct elements in the figure.
+        Other commands were used to set attributes for those elements.
+        You should also notice that the names of points appearing in the figure do not always match the names of the variables.
+        This is because default names for points are created alphabetically
+        and the code in our example did not assign name attributes except for the invisible element <c>M1</c>.
+      </p>
+    </example>
+    <p>
+      Jessie Code has a method to set attributes at the time elements are created in the graph.
+      Unfortunately, the code uses double less-than and greater-than symbols to group the attributes.
+      Consequently, in <pretext />, we need to escape those codes out.
+    </p>
+    <example>
+      <p>
+        The following figure repeats the construction above but with the attributes assigned at creation.
+      </p>
+      <figure>
+        <caption>Construction for Euclid's Proposition 2.</caption>
+        <interactive xml:id='euclid-prop-2-construction-2' platform='jsxgraph' width="75%" aspect="1:1">
+          <slate xml:id='euclid-prop-2-slate-2' surface="jessiecode">
+            A = point(1,1) &lt;&lt; size:5, color:"blue" &gt;&gt;;
+            B = point(2,4) &lt;&lt; size:5, color:"blue" &gt;&gt;;
+            S1 = segment(A,B) &lt;&lt; strokeWidth:3, color:"blue" &gt;&gt;;
+            C = point(-1,1) &lt;&lt; size:5, color:"orange" &gt;&gt;;
+            C1 = circle(A,C) &lt;&lt; dash:2 &gt;&gt;;
+            C2 = circle(C,A) &lt;&lt; dash:2 &gt;&gt;;
+            M1 = midpoint(A,C) &lt;&lt; name:"", visible:false &gt;&gt;;
+            D = intersection(C1,C2);
+            C3 = circle(A,B) &lt;&lt; dash:2 &gt;&gt;;
+            L2 = line(D,A) &lt;&lt; straightFirst:false &gt;&gt;;
+            G = intersection(L2,C3);
+            C4 = circle(D,G);
+            L3 = line(D,C) &lt;&lt; straightFirst:false &gt;&gt;;
+            H = intersection(L3,C4) &lt;&lt; color:"orange" &gt;&gt;;
+            S2 = segment(C,H) &lt;&lt; strokeWidth:3, strokeColor:"orange" &gt;&gt;;
+          </slate>
+        </interactive>
+      </figure>
+      <p>
+        The construction used to generate this involved the following Jessie Code commands.
+      </p>
+      <listing>
+        <pre>
+          A = point(1,1) &lt;&lt; size:5, color:"blue" &gt;&gt;;
+          B = point(2,4) &lt;&lt; size:5, color:"blue" &gt;&gt;;
+          S1 = segment(A,B) &lt;&lt; strokeWidth:3, color:"blue" &gt;&gt;;
+          C = point(-1,1) &lt;&lt; size:5, color:"orange" &gt;&gt;;
+          C1 = circle(A,C) &lt;&lt; dash:2 &gt;&gt;;
+          C2 = circle(C,A) &lt;&lt; dash:2 &gt;&gt;;
+          M1 = midpoint(A,C) &lt;&lt; name:"", visible:false &gt;&gt;;
+          D = intersection(C1,C2);
+          C3 = circle(A,B) &lt;&lt; dash:2 &gt;&gt;;
+          L2 = line(D,A) &lt;&lt; straightFirst:false &gt;&gt;;
+          G = intersection(L2,C3);
+          C4 = circle(D,G);
+          L3 = line(D,C) &lt;&lt; straightFirst:false &gt;&gt;;
+          H = intersection(L3,C4) &lt;&lt; color:"orange" &gt;&gt;;
+          S2 = segment(C,H) &lt;&lt; strokeWidth:3, strokeColor:"orange" &gt;&gt;;
+        </pre>
+      </listing>
+    </example>
+</section>

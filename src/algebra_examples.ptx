@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file is part of the book                -->
+<!--                                              -->
+<!--      A Modeling Approach to Calculus         -->
+<!--                                              -->
+<!-- Copyright (C) 2019  D. Brian Walton          -->
+<!-- See the file COPYING for copying conditions. -->
+
+<section xml:id="section-algebra-examples">
+  <title>Illustration of Cartesian Graphs</title>
+
+  <p>
+    JSXGraph also is able to generate figures showing functions.
+    The elementary approaches to these concepts are compatible with Jessie Code.
+  </p>
+
+  <example>
+    <p>
+      We start with an example exploring sinusoidal functions.
+      The dynamic figure generated will construct the graph of
+      <me>f(x) = A \sin( a x ) + c</me>.
+      Each of the parameters <m>A</m>, <m>a</m>, and <m>c</m> will be represented in the figure as slider controls.
+      By changing each of the controls, you can visualize the effect of the transformation.
+    </p>
+    <figure>
+      <caption>Exploration of a sinusoidal function</caption>
+      <interactive id='sinusoidal-graphs' platform='jsxgraph' width="75%" aspect="3:2">
+        <slate id='sinusoidal-graph-slate' surface='jessiecode' aspect="3:2">
+          $board.setBoundingBox([-5,5,10,-5], false);
+          OO = point(0,0) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+          E1 = point(1,0) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+          E2 = point(0,1) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+          xax = axis(OO,E1);
+          yax = axis(OO,E2);
+          A = slider([2,4], [8,4], [-5, 1, 5])
+              &lt;&lt; snapWidth: 0.1,
+                  point1: &lt;&lt; frozen:true, visible:false &gt;&gt;,
+                  point2: &lt;&lt; frozen:true, visible:false &gt;&gt;,
+                  name: 'A'
+              &gt;&gt;;
+          a = slider([2,3], [8,3], [-2, 1, 2])
+              &lt;&lt; snapWidth: 0.05,
+                  point1: &lt;&lt; frozen:true, visible:false &gt;&gt;,
+                  point2: &lt;&lt; frozen:true, visible:false &gt;&gt;,
+                  name: 'a'
+              &gt;&gt;;
+          c = slider([2,2], [8,2], [-2, 1, 2])
+              &lt;&lt; snapWidth: 0.05,
+                  point1: &lt;&lt; frozen:true, visible:false &gt;&gt;,
+                  point2: &lt;&lt; frozen:true, visible:false &gt;&gt;,
+                  name: 'c'
+              &gt;&gt;;
+          P = plot( function(x) { return A*sin(a*x)+c; } )
+              &lt;&lt; strokeWidth:3, strokeColor:"orange" &gt;&gt;;
+        </slate>
+      </interactive>
+    </figure>
+    <listing>
+      <pre>
+        $board.setBoundingBox([-5,5,10,-5], false);
+        OO = point(0,0) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+        E1 = point(1,0) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+        E2 = point(0,1) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+        xax = axis(OO,E1);
+        yax = axis(OO,E2);
+        A = slider([2,4], [8,4], [-5, 1, 5])
+            &lt;&lt; snapWidth: 0.1,
+                point1: &lt;&lt; frozen:true, visible:false &gt;&gt;,
+                point2: &lt;&lt; frozen:true, visible:false &gt;&gt;,
+                name: 'A'
+            &gt;&gt;;
+        a = slider([2,3], [8,3], [-2, 1, 2])
+            &lt;&lt; snapWidth: 0.05,
+                point1: &lt;&lt; frozen:true, visible:false &gt;&gt;,
+                point2: &lt;&lt; frozen:true, visible:false &gt;&gt;,
+                name: 'a'
+            &gt;&gt;;
+        c = slider([2,2], [8,2], [-2, 1, 2])
+            &lt;&lt; snapWidth: 0.05,
+                point1: &lt;&lt; frozen:true, visible:false &gt;&gt;,
+                point2: &lt;&lt; frozen:true, visible:false &gt;&gt;,
+                name: 'c'
+            &gt;&gt;;
+        P = plot( function(x) { return A*sin(a*x)+c; } )
+            &lt;&lt; strokeWidth:3, strokeColor:"orange" &gt;&gt;;
+      </pre>
+    </listing>
+  </example>
+
+  <p>
+    In addition to using sliders to create parameters for a figure,
+    we can also use the coordinates of points moving in the plane to generate our figure.
+  </p>
+
+  <example>
+    <p>
+      In this example, we have three points that are constrained to <m>x=-1</m>, <m>x=0</m>, and <m>x=2</m>.
+      We then construct the (at most) quadratic function passing through the points.
+    </p>
+    <figure>
+      <caption>Interactive figure showing polynomial interpolation of degree 2 through three points.</caption>
+      <interactive id='quadratic-interpolation' platform='jsxgraph' width="75%" aspect="1:1">
+        <slate id='quadratic-interpolation-slate' surface='jessiecode' aspect="1:1">
+          $board.setBoundingBox([-5,5,5,-5], false);
+          OO = point(0,0) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+          E1 = point(1,0) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+          E2 = point(0,1) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+          xax = axis(OO,E1);
+          yax = axis(OO,E2);
+          P1a = point(-1,0) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+          P1b = point(-1,1) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+          V1 = line(P1a, P1b) &lt;&lt; dash:3, opacity:0.5, label:false &gt;&gt;;
+          V2 = line(OO, E2) &lt;&lt; dash:3, opacity:0.5, label:false &gt;&gt;;
+          P3a = point(2,0) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+          P3b = point(2,1) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+          V3 = line(P3a, P3b) &lt;&lt; dash:3, opacity:0.5, label:false &gt;&gt;;
+          A = point(-1,1) &lt;&lt; name:'A' &gt;&gt;;
+          A.glide(V1);
+          B = point(0,3) &lt;&lt; name:'B' &gt;&gt;;
+          B.glide(V2);
+          C = point(2,2) &lt;&lt; name:'C' &gt;&gt;;
+          C.glide(V3);
+          plot( function(x){
+                  y1 = A.Y()*(x-B.X())*(x-C.X())/3;
+                  y2 = B.Y()*(x-A.X())*(x-C.X())/-2;
+                  y3 = C.Y()*(x-A.X())*(x-B.X())/6;
+                  return y1+y2+y3;
+                } ) &lt;&lt; strokeWidth: 2 &gt;&gt;;
+        </slate>
+      </interactive>
+    </figure>
+    <listing>
+      <pre>
+        $board.setBoundingBox([-5,5,5,-5], false);
+        OO = point(0,0) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+        E1 = point(1,0) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+        E2 = point(0,1) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+        xax = axis(OO,E1);
+        yax = axis(OO,E2);
+        P1a = point(-1,0) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+        P1b = point(-1,1) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+        V1 = line(P1a, P1b) &lt;&lt; dash:3, opacity:0.5, label:false &gt;&gt;;
+        V2 = line(OO, E2) &lt;&lt; dash:3, opacity:0.5, label:false &gt;&gt;;
+        P3a = point(2,0) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+        P3b = point(2,1) &lt;&lt; fixed:true, visible:false, label:false &gt;&gt;;
+        V3 = line(P3a, P3b) &lt;&lt; dash:3, opacity:0.5, label:false &gt;&gt;;
+        A = point(-1,1) &lt;&lt; name:'A' &gt;&gt;;
+        A.glide(V1);
+        B = point(0,3) &lt;&lt; name:'B' &gt;&gt;;
+        B.glide(V2);
+        C = point(2,2) &lt;&lt; name:'C' &gt;&gt;;
+        C.glide(V3);
+        plot( function(x){
+                y1 = A.Y()*(x-B.X())*(x-C.X())/3;
+                y2 = B.Y()*(x-A.X())*(x-C.X())/-2;
+                y3 = C.Y()*(x-A.X())*(x-B.X())/6;
+                return y1+y2+y3;
+              } ) &lt;&lt; strokeWidth: 2 &gt;&gt;;
+      </pre>
+    </listing>
+  </example>
+</section>

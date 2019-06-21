@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+  Overall element for a Mathbook XML document; mandatory, always
+  Including XInclude in order to segment the work into multiple chapter files,
+  and perhaps ultimately individual section files.
+-->
+<!DOCTYPE doc>
+
+<pretext xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="./bookinfo.xml" /> <!-- ISBN, website, other metadata -->
+
+  <book xml:id="linalg-diffeq">
+    <title>Interactives in PreTeXt</title>
+
+    <xi:include href="./frontmatter.xml" />
+
+    <chapter>
+      <title>Demonstration</title>
+      <xi:include href="./geometry_examples.ptx" />
+      <xi:include href="./algebra_examples.ptx" />
+    </chapter>
+
+  </book>
+
+</pretext>

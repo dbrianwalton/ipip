@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+The frontmatter contains a variety of items that precede
+the actual content.  They tend to get placed in the "right"
+place and order, and not necessarily the order they appear here.
+They differ from "docinfo" items in that they will be *content*
+that a reader will actually see.
+
+The xml:id string is used to form a filename for the webpage.
+Setting this one to "index" makes for a good default page
+when you host your project on a server.
+-->
+
+<frontmatter xml:id="index">
+  <!--
+  Items typically on the main title page, perhaps duplicated
+  in the half-title page, page headings, etc.
+  One exception - main title and (optional) subtitle follow
+  the scheme for titling any division of the work.
+   -->
+
+  <titlepage>
+
+     <!-- There can be several authors here -->
+    <author>
+      <personname>D. Brian Walton</personname>
+      <department>Department of Mathematics and Statistics</department>
+      <!-- Use "break" tag anywhere for forced line break -->
+      <institution>
+        <line>James Madison University</line>
+        <line>Harrisonburg, Virginia, USA</line>
+      </institution>
+      <email>waltondb@jmu.edu</email>
+    </author>
+
+    <!-- Can set date manually or use the "today" element -->
+    <date><today /></date>
+
+  </titlepage>
+
+  <!--
+  Acknowledgements, dedications, colophon (ISBN, copyright, etc)
+  are supported in the book document type.  Such a diverse range
+  is not yet available for articles.  Send requests.
+  -->
+
+  <preface xml:id="preface">
+    <p>
+    </p>
+  </preface>
+</frontmatter>
